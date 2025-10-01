@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stitchie — Fashion at your Doorstep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #fffafc;
+      --accent: #7b2ff7;
+      --accent-2: #ff6b6b;
+      --muted: #6b6b7a;
+      --card: #ffffff;
+      --glass: rgba(255,255,255,0.7);
+      --radius: 16px;
+      --shadow: 0 6px 30px rgba(30,20,60,0.08);
+      --purple-grad: linear-gradient(135deg,#7b2ff7 0%, #a855f7 50%, #ff8aa2 100%);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:linear-gradient(180deg,#fff 0%, #fff7fb 40%);
+      color:#111; -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale; line-height:1.45;
+    }
+    header{display:flex;align-items:center;justify-content:space-between;padding:28px 6vw}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:36px;height:36px;border-radius:8px;background:var(--purple-grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    .cta{display:flex;gap:10px}
+    .btn{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn.outline{background:transparent;border:2px solid rgba(124,58,237,0.12);color:var(--accent)}
+    .btn.primary{background:var(--accent);color:#fff;box-shadow:0 8px 30px rgba(123,47,247,0.18)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;padding:36px 6vw}
+    .eyebrow{color:var(--accent);font-weight:700}
+    h1{font-family:Poppins, Inter; font-size:48px;margin:10px 0 8px}
+    p.lead{color:var(--muted);max-width:650px}
+    .hero-cta{margin-top:20px;display:flex;gap:12px}
+
+    .card{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+    .pricing-card{transform:translateY(8px);border-radius:18px;padding:18px}
+    .price-row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+    .price{font-weight:700;color:#ff5a80}
+
+    /* Stats */
+    .stats{display:flex;gap:18px;margin-top:18px;color:var(--muted);font-weight:700}
+
+    /* Services */
+    .section{padding:48px 6vw}
+    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px}
+    .service{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,252,0.9));border-radius:14px;padding:18px;text-align:center;box-shadow:0 6px 20px rgba(20,20,30,0.04)}
+    .service h4{margin:12px 0 6px}
+    .service p{color:var(--muted);font-size:14px}
+
+    /* How it works */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
+    .step{background:var(--card);padding:18px;border-radius:12px;text-align:center;box-shadow:var(--shadow)}
+    .step .num{background:linear-gradient(90deg,#ffd7e6,#f0d6ff);width:38px;height:38px;border-radius:10px;display:inline-grid;place-items:center;font-weight:700}
+
+    /* Waitlist + Form area */
+    .split{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
+    .benefits{list-style:none;padding:0;margin:0;color:var(--muted)}
+    .benefits li{margin:10px 0;padding-left:24px;position:relative}
+    .benefits li:before{content:'•';position:absolute;left:0;top:0;color:var(--accent)}
+
+    form.waitlist{display:flex;flex-direction:column;gap:12px}
+    input,select{padding:12px;border-radius:10px;border:1px solid #eee;font-size:14px}
+    .btn.full{width:100%}
+
+    /* Partner area */
+    .partner{background:linear-gradient(180deg,#fffaf6,#fff7fb);padding:40px;border-radius:18px;margin-top:30px}
+    .partner-grid{display:grid;grid-template-columns:420px 1fr;gap:28px}
+
+    footer{background:#0f1724;color:#d8e0ff;padding:28px 6vw;margin-top:60px}
+    footer .cols{display:flex;gap:28px}
+    footer a{color:#d8e0ff; text-decoration:none}
+
+    /* small screens */
+    @media (max-width:1000px){
+      .hero, .split, .partner-grid{grid-template-columns:1fr}
+      .services{grid-template-columns:repeat(2,1fr)}
+      .steps{grid-template-columns:repeat(2,1fr)}
+      header{padding:18px}
+      h1{font-size:34px}
+    }
+    @media (max-width:600px){
+      .services{grid-template-columns:1fr}
+      .stats{flex-direction:column;gap:8px}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">S</div>
+      <div>
+        <div style="font-weight:700">Stitchie</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">The Way You Wear</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#how">How it Works</a>
+      <a href="#customers">For Customers</a>
+      <a href="#tailors">For Tailors</a>
+    </nav>
+    <div class="cta">
+      <button class="btn outline">Join as Tailor</button>
+      <button class="btn primary">Join Waitlist</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Launching soon in Hyderabad</div>
+        <h1>Fashion at your <span style="color:var(--accent)">Doorstep</span></h1>
+        <p class="lead">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance — all at your doorstep.</p>
+        <div class="hero-cta">
+          <button class="btn primary">Join Waitlist - Customers</button>
+          <button class="btn outline">Join as Tailor</button>
+        </div>
+        <div class="stats" aria-hidden>
+          <div>500+<br><span style="font-size:12px;color:var(--muted)">Verified Tailors</span></div>
+          <div>10,000+<br><span style="font-size:12px;color:var(--muted)">Happy Customers</span></div>
+          <div>50,000+<br><span style="font-size:12px;color:var(--muted)">Orders Completed</span></div>
+          <div>24hrs<br><span style="font-size:12px;color:var(--muted)">Average Delivery</span></div>
+        </div>
+      </div>
+
+      <aside class="card pricing-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700">Premium Tailor</div>
+            <div style="font-size:12px;color:var(--muted)">★★★★★ 4.9 (127 reviews)</div>
+          </div>
+          <div style="width:44px;height:44px;border-radius:10px;background:var(--purple-grad);display:grid;place-items:center;color:#fff">👗</div>
+        </div>
+        <div style="margin-top:10px">
+          <div class="price-row"><div>Custom Stitching</div><div class="price">₹1,500</div></div>
+          <div class="price-row"><div>Alterations</div><div>₹300</div></div>
+          <div style="color:green;font-size:13px;margin-top:8px">Doorstep pickup in 2 hours</div>
+        </div>
+        <div style="margin-top:14px;text-align:right">
+          <button class="btn primary">Book Now</button>
+        </div>
+      </aside>
+    </section>
+
+    <section id="services" class="section">
+      <h2 style="text-align:center;font-family:Poppins">Our Services</h2>
+      <p style="text-align:center;color:var(--muted)">From custom stitching to alterations, we connect you with skilled professionals for all your fashion needs</p>
+      <div class="services" style="margin-top:22px">
+        <div class="service">
+          <div style="font-size:28px">✂️</div>
+          <h4>Custom Stitching</h4>
+          <p>Get your dream outfits stitched by verified local tailors with doorstep pickup and delivery.</p>
+        </div>
+        <div class="service">
+          <div style="font-size:28px">🧵</div>
+          <h4>Alterations &amp; Repairs</h4>
+          <p>Professional alterations and clothing repairs done with precision and care.</p>
+        </div>
+        <div class="service">
+          <div style="font-size:28px">🧼</div>
+          <h4>Clothing Maintenance</h4>
+          <p>Premium laundry and garment care services to keep your clothes looking fresh.</p>
+        </div>
+        <div class="service">
+          <div style="font-size:28px">👑</div>
+          <h4>Festive &amp; Wedding Wear</h4>
+          <p>Specialized services for ethnic wear, party outfits, and wedding collections.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <h3 style="text-align:center;font-family:Poppins">How It Works</h3>
+      <p style="text-align:center;color:var(--muted)">Simple steps to get started with Stitchie - whether you're a customer or a tailor</p>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h4>Browse & Select</h4><p style="color:var(--muted)">Browse verified tailors by category, style, and ratings.</p></div>
+        <div class="step"><div class="num">2</div><h4>Book Service</h4><p style="color:var(--muted)">Schedule your service and choose pickup time.</p></div>
+        <div class="step"><div class="num">3</div><h4>Doorstep Pickup</h4><p style="color:var(--muted)">Our agents collect your fabric and measurements at home.</p></div>
+        <div class="step"><div class="num">4</div><h4>Get Delivered</h4><p style="color:var(--muted)">Track progress and receive your perfect outfit at your doorstep.</p></div>
+      </div>
+    </section>
+
+    <section id="customers" class="section">
+      <div class="split">
+        <div>
+          <h3 style="font-family:Poppins">Fashion Made Personal</h3>
+          <p style="color:var(--muted)">Experience the convenience of doorstep tailoring services with verified professionals, quality assurance, and timely delivery.</p>
+          <ul class="benefits" style="margin-top:18px">
+            <li>Doorstep pickup and delivery service</li>
+            <li>Verified and rated tailors &amp; boutiques</li>
+            <li>Quality guaranteed with timely delivery</li>
+            <li>COD and digital payment options</li>
+            <li>Real-time order tracking</li>
+            <li>Affordable and premium pricing options</li>
+          </ul>
+
+          <div style="margin-top:18px" class="card">
+            <strong style="color:#111">"Amazing service! Got my wedding lehenga stitched perfectly."</strong>
+            <div style="margin-top:8px;color:var(--muted)">— Priya Sharma, Customer</div>
+          </div>
+        </div>
+
+        <aside class="card">
+          <h4 style="margin:0 0 6px">Join Our Waitlist</h4>
+          <p style="color:var(--muted);margin:0 0 12px">Be the first to experience Stitchie when we launch in Hyderabad</p>
+          <form class="waitlist" id="waitlistForm">
+            <input type="email" id="email" placeholder="your.email@example.com" required>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" required>
+            <button class="btn primary full" type="submit">Join Waitlist</button>
+            <div id="waitMsg" style="font-size:13px;color:green;display:none">Thanks — we'll notify you when we launch.</div>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <section id="tailors" class="section">
+      <div class="partner">
+        <h3 style="font-family:Poppins">Grow Your Business</h3>
+        <p style="color:var(--muted)">Join our network of verified tailors and boutiques. Get more customers, digital tools, and logistics support to scale your business.</p>
+
+        <div class="partner-grid" style="margin-top:18px">
+          <div class="card">
+            <h4>Partner With Us</h4>
+            <form id="partnerForm" style="display:grid;gap:10px;margin-top:12px">
+              <input placeholder="Business Name*" required>
+              <input placeholder="Owner Name*" required>
+              <input type="email" placeholder="Email Address*" required>
+              <input placeholder="Phone Number*" required>
+              <div style="display:flex;gap:8px">
+                <input placeholder="Experience (Years)" style="flex:1">
+                <input placeholder="Location" style="flex:1">
+              </div>
+              <button class="btn primary" type="submit">Apply to Join</button>
+            </form>
+          </div>
+
+          <div style="background:transparent;padding:18px;align-self:center">
+            <h4>Why Partner With Stitchie?</h4>
+            <ul style="color:var(--muted)">
+              <li>Increased digital visibility for your business</li>
+              <li>Consistent flow of verified customers</li>
+              <li>Logistics support for pickup/delivery</li>
+              <li>Digital tools for order management</li>
+              <li>Flexible commission or subscription model</li>
+              <li>Quality control and customer support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
+      <div>
+        <div style="font-weight:800;font-size:18px">Stitchie</div>
+        <div style="color:var(--muted);margin-top:8px;max-width:320px">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance at your doorstep.</div>
+      </div>
+      <div style="display:flex;gap:40px">
+        <div>
+          <div style="font-weight:700">Quick Links</div>
+          <div style="margin-top:8px"><a href="#services">Services</a><br><a href="#how">How It Works</a></div>
+        </div>
+        <div>
+          <div style="font-weight:700">Contact</div>
+          <div style="margin-top:8px;color:var(--muted)">Hyderabad, India<br>hello@stitchie.inc<br>+91 98765 43210</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:22px;font-size:13px;color:rgba(216,224,255,0.8)">© 2025 Stitchie. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Simple interactivity: Waitlist form submission & basic validation
+    document.getElementById('waitlistForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+      const msg = document.getElementById('waitMsg');
+      if(!email.value || !phone.value){
+        alert('Please enter email and phone');
+        return;
+      }
+      // mock submitting
+      msg.style.display = 'block';
+      setTimeout(()=>{ msg.style.opacity = '1'; }, 50);
+      email.value = ''; phone.value = '';
+    });
+
+    // Partner form: simple Thank you
+    document.getElementById('partnerForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thanks — your application has been submitted. We will reach out within 2-3 business days.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
