@@ -7,17 +7,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     :root{
       --bg: #fffafc;
-      --accent: #7b2ff7;
-      --accent-2: #ff6b6b;
+      --accent: #7030a0ff;   /* NEW purple */
+      --accent-2: #fe7b48ff; /* NEW orange */
       --muted: #6b6b7a;
       --card: #ffffff;
       --glass: rgba(255,255,255,0.7);
       --radius: 16px;
       --shadow: 0 6px 30px rgba(30,20,60,0.08);
-      --purple-grad: linear-gradient(135deg,#7b2ff7 0%, #a855f7 50%, #ff8aa2 100%);
+      --purple-grad: linear-gradient(135deg,#7030a0ff 0%, #9a58d1 50%, #fe7b48ff 100%);
+      --mobile-pad: 4vw; /* New variable for consistent mobile padding */
     }
     *{box-sizing:border-box}
     html,body{height:100%;}
@@ -27,103 +29,295 @@
       color:#111; -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale; line-height:1.45;
     }
+    /* Default Desktop Header */
     header{display:flex;align-items:center;justify-content:space-between;padding:28px 6vw}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:36px;height:36px;border-radius:8px;background:var(--purple-grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    .brand img{height:36px; display:block; object-fit:contain}
+
     nav{display:flex;gap:18px;align-items:center}
     nav a{color:var(--muted);text-decoration:none;font-weight:600}
     .cta{display:flex;gap:10px}
-    .btn{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
-    .btn.outline{background:transparent;border:2px solid rgba(124,58,237,0.12);color:var(--accent)}
-    .btn.primary{background:var(--accent);color:#fff;box-shadow:0 8px 30px rgba(123,47,247,0.18)}
+    .btn{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700; white-space: nowrap;}
+    .btn.outline{background:transparent;border:2px solid rgba(112,48,160,0.12);color:var(--accent)}
+    .btn.primary{background:var(--accent);color:#fff;box-shadow:0 8px 30px rgba(112,48,160,0.18)}
+    .btn.primary:hover{background:var(--accent-2)}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;padding:36px 6vw}
-    .eyebrow{color:var(--accent);font-weight:700}
+    /* Hero (Desktop) */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:stretch;padding:36px 6vw}
+    .hero > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hero-image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .hero-image-container img{
+      max-width:100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    /* Launching Banner */
+    .launching-banner {
+      background: var(--purple-grad);
+      color: #fff;
+      text-align: center;
+      padding: 10px 6vw;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-out forwards;
+      box-shadow: var(--shadow);
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Survey Card */
+    .survey-card {
+        background: rgba(112,48,160,0.05);
+        border-left: 4px solid var(--accent);
+        padding: 12px 18px;
+        border-radius: 0 10px 10px 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    .survey-card a {
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+        margin-left: 4px;
+    }
+
     h1{font-family:Poppins, Inter; font-size:48px;margin:10px 0 8px}
     p.lead{color:var(--muted);max-width:650px}
-    .hero-cta{margin-top:20px;display:flex;gap:12px}
-
-    .card{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
-    .pricing-card{transform:translateY(8px);border-radius:18px;padding:18px}
-    .price-row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
-    .price{font-weight:700;color:#ff5a80}
+    .hero-cta{display:flex;gap:12px}
 
     /* Stats */
-    .stats{display:flex;gap:18px;margin-top:18px;color:var(--muted);font-weight:700}
-
-    /* Services */
+    .stats{display:flex;gap:18px;justify-content: space-between; color:var(--muted);font-weight:700}
+    
+    /* Global Section Styling */
     .section{padding:48px 6vw}
     .services{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px}
-    .service{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,252,0.9));border-radius:14px;padding:18px;text-align:center;box-shadow:0 6px 20px rgba(20,20,30,0.04)}
+    .service {
+        background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,252,0.9));
+        border-radius:14px;
+        padding:18px;
+        text-align:center;
+        box-shadow:0 6px 20px rgba(20,20,30,0.04);
+        display: flex; /* Enable flexbox for vertical centering */
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center children horizontally */
+    }
     .service h4{margin:12px 0 6px}
     .service p{color:var(--muted);font-size:14px}
 
-    /* How it works */
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
-    .step{background:var(--card);padding:18px;border-radius:12px;text-align:center;box-shadow:var(--shadow)}
-    .step .num{background:linear-gradient(90deg,#ffd7e6,#f0d6ff);width:38px;height:38px;border-radius:10px;display:inline-grid;place-items:center;font-weight:700}
+    .step{
+        background:var(--card);
+        padding:18px;
+        border-radius:12px;
+        box-shadow:var(--shadow);
+        /* New: Align content in step vertically */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center horizontally */
+        text-align: center;
+    }
+    .step .num {
+        background: var(--accent-2);
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+    }
 
-    /* Waitlist + Form area */
-    .split{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
-    .benefits{list-style:none;padding:0;margin:0;color:var(--muted)}
-    .benefits li{margin:10px 0;padding-left:24px;position:relative}
-    .benefits li:before{content:'•';position:absolute;left:0;top:0;color:var(--accent)}
-
+    /* Form Styling */
     form.waitlist{display:flex;flex-direction:column;gap:12px}
-    input,select{padding:12px;border-radius:10px;border:1px solid #eee;font-size:14px}
-    .btn.full{width:100%}
+    input,select{
+        padding:14px; 
+        border-radius:12px; 
+        border:1px solid #ccc; 
+        font-size:15px;
+        color: #333;
+    }
+    input::placeholder {
+        color: var(--muted);
+    }
+    .form-group-horizontal {
+        display: flex;
+        gap: 8px;
+    }
 
-    /* Partner area */
-    .partner{background:linear-gradient(180deg,#fffaf6,#fff7fb);padding:40px;border-radius:18px;margin-top:30px}
-    .partner-grid{display:grid;grid-template-columns:420px 1fr;gap:28px}
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #7030a0, #fe7b48);
+      color: #ffffff;
+      padding: 20px var(--mobile-pad);
+      margin-top: 60px;
+      text-align: center;
+    }
+    footer a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    footer .muted {
+      color: #d8e0ff;
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0; /* Centered vertically with space above and below */
+      justify-content: center;
+    }
+    .social-icons a {
+      color: #ffffff;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #d8e0ff;
+    }
 
-    footer{background:#0f1724;color:#d8e0ff;padding:28px 6vw;margin-top:60px}
-    footer .cols{display:flex;gap:28px}
-    footer a{color:#d8e0ff; text-decoration:none}
-
-    /* small screens */
+    /* === Mobile Screen Media Queries === */
     @media (max-width:1000px){
       .hero, .split, .partner-grid{grid-template-columns:1fr}
+      .hero > div { display: block; gap: 0; }
+      .hero-image-container { order: -1; margin-bottom: 20px; }
       .services{grid-template-columns:repeat(2,1fr)}
       .steps{grid-template-columns:repeat(2,1fr)}
-      header{padding:18px}
-      h1{font-size:34px}
+      header{padding:18px 4vw;} 
+      h1{font-size:38px; margin-top: 0;}
     }
+
     @media (max-width:600px){
+      /* Full-width utilization & Consistent Padding */
+      header, .launching-banner, .hero, .section, footer{
+          padding-left: var(--mobile-pad);
+          padding-right: var(--mobile-pad);
+      }
+      .section{padding-top: 30px; padding-bottom: 30px;}
+      .hero{padding-top: 20px; padding-bottom: 20px; gap: 15px;}
+      
+      /* CRITICAL HEADER CTA OVERLAP FIX */
+      header{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand{width: 100%; justify-content: center;}
+      .cta{
+        width: 100%; 
+        justify-content: space-between;
+      }
+      .cta .btn {
+          padding: 8px 12px; 
+          font-size: 13px;
+          flex-grow: 1;
+          text-align: center;
+      }
+
       .services{grid-template-columns:1fr}
-      .stats{flex-direction:column;gap:8px}
-      nav{display:none}
+      nav{display:none} 
+      
+      /* Typography & Heading Fix */
+      .launching-banner { font-size: 16px; margin-bottom: 10px; }
+      h1{font-size: 30px; line-height: 1.2; margin-bottom: 5px;}
+      p.lead {margin-top: 0; margin-bottom: 15px;}
+
+      /* Hero Content Stacking Fixes */
+      .hero-image-container { padding: 0; border-radius: 12px; }
+      .hero-cta{ flex-direction: column; margin-top: 0; }
+      .hero-cta .btn { width: 100%; margin-bottom: 10px; }
+
+      /* Survey Card Fix */
+      .survey-card { padding: 10px 15px; margin-top: 15px; margin-bottom: 15px; font-size: 13px; border-radius: 10px; }
+      
+      /* Tailor Form Misalignment Fix (Vertical Stack) */
+      .form-group-horizontal {
+          flex-direction: column; 
+          gap: 10px;
+      }
+      .form-group-horizontal input {
+          width: 100%; 
+      }
+      
+      /* Footer Alignment Fix */
+      footer {
+        padding: 15px var(--mobile-pad);
+        text-align: center;
+      }
+      footer > div:first-child {
+          display: none;
+      }
+      footer .brand {
+        margin-bottom: 10px;
+      }
+      footer .brand img {
+        height: 30px;
+      }
+      footer .muted {
+        margin: 5px 0;
+      }
+      .cols {
+          display: none;
+      }
+      .social-icons {
+          margin: 10px 0;
+          justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">
-      <div class="logo">S</div>
-      <div>
-        <div style="font-weight:700">Stitchie</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">The Way You Wear</div>
-      </div>
-    </div>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#how">How it Works</a>
-      <a href="#customers">For Customers</a>
-      <a href="#tailors">For Tailors</a>
-    </nav>
-    <div class="cta">
-      <button class="btn outline">Join as Tailor</button>
-      <button class="btn primary">Join Waitlist</button>
-    </div>
-  </header>
+  <div class="brand">
+    <img src="Logowithtagline.png" alt="Stitchie Logo">
+  </div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#how">How it Works</a>
+    <a href="#customers">For Customers</a>
+    <a href="#tailors">For Tailors</a>
+  </nav>
+  <div class="cta">
+    <button class="btn outline">Join as Tailor</button>
+    <button class="btn primary">Join Waitlist</button>
+  </div>
+</header>
 
   <main>
+    <div class="launching-banner">Launching soon in Hyderabad</div>
+
     <section class="hero">
       <div>
-        <div class="eyebrow">Launching soon in Hyderabad</div>
-        <h1>Fashion at your <span style="color:var(--accent)">Doorstep</span></h1>
+        <h1><span style="color:var(--accent)">Fashion at your <span style="color:var(--accent-2)">Doorstep</span></h1>
         <p class="lead">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance — all at your doorstep.</p>
+        
+        <div class="survey-card">
+            <strong>Help us shape Stitchie</strong>
+            <p style="margin: 4px 0 0; color: var(--muted);">Take a short survey — your feedback helps us design the perfect tailoring marketplace.
+            <a href="https://forms.gle/EyVfDzXTnq5hK3Rd6" target="_blank" rel="noopener noreferrer">Fill the survey here &rarr;</a>
+            </p>
+        </div>
         <div class="hero-cta">
           <button class="btn primary">Join Waitlist - Customers</button>
           <button class="btn outline">Join as Tailor</button>
@@ -136,22 +330,8 @@
         </div>
       </div>
 
-      <aside class="card pricing-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-          <div>
-            <div style="font-weight:700">Premium Tailor</div>
-            <div style="font-size:12px;color:var(--muted)">★★★★★ 4.9 (127 reviews)</div>
-          </div>
-          <div style="width:44px;height:44px;border-radius:10px;background:var(--purple-grad);display:grid;place-items:center;color:#fff">👗</div>
-        </div>
-        <div style="margin-top:10px">
-          <div class="price-row"><div>Custom Stitching</div><div class="price">₹1,500</div></div>
-          <div class="price-row"><div>Alterations</div><div>₹300</div></div>
-          <div style="color:green;font-size:13px;margin-top:8px">Doorstep pickup in 2 hours</div>
-        </div>
-        <div style="margin-top:14px;text-align:right">
-          <button class="btn primary">Book Now</button>
-        </div>
+      <aside class="hero-image-container">
+        <img src="Stitchie Workflow Diagram.png" alt="Stitchie Workflow Diagram">
       </aside>
     </section>
 
@@ -217,8 +397,8 @@
           <h4 style="margin:0 0 6px">Join Our Waitlist</h4>
           <p style="color:var(--muted);margin:0 0 12px">Be the first to experience Stitchie when we launch in Hyderabad</p>
           <form class="waitlist" id="waitlistForm">
-            <input type="email" id="email" placeholder="your.email@example.com" required>
-            <input type="tel" id="phone" placeholder="+91 98765 43210" required>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
             <button class="btn primary full" type="submit">Join Waitlist</button>
             <div id="waitMsg" style="font-size:13px;color:green;display:none">Thanks — we'll notify you when we launch.</div>
           </form>
@@ -235,16 +415,17 @@
           <div class="card">
             <h4>Partner With Us</h4>
             <form id="partnerForm" style="display:grid;gap:10px;margin-top:12px">
-              <input placeholder="Business Name*" required>
-              <input placeholder="Owner Name*" required>
-              <input type="email" placeholder="Email Address*" required>
-              <input placeholder="Phone Number*" required>
-              <div style="display:flex;gap:8px">
-                <input placeholder="Experience (Years)" style="flex:1">
-                <input placeholder="Location" style="flex:1">
-              </div>
-              <button class="btn primary" type="submit">Apply to Join</button>
-            </form>
+  <input name="businessName" placeholder="Business Name*" required>
+  <input name="ownerName" placeholder="Owner Name*" required>
+  <input type="email" name="email" placeholder="Email Address*" required>
+  <input name="phone" placeholder="Phone Number*" required>
+  <div class="form-group-horizontal">
+    <input name="experience" placeholder="Experience (Years)" style="flex:1">
+    <input name="location" placeholder="Location" style="flex:1">
+  </div>
+  <button class="btn primary" type="submit">Apply to Join</button>
+  <div id="partnerMsg" style="font-size:13px;color:green;display:none">Thanks! We've received your application.</div>
+</form>
           </div>
 
           <div style="background:transparent;padding:18px;align-self:center">
@@ -265,48 +446,105 @@
   </main>
 
   <footer>
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
-      <div>
-        <div style="font-weight:800;font-size:18px">Stitchie</div>
-        <div style="color:var(--muted);margin-top:8px;max-width:320px">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance at your doorstep.</div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+      <div class="brand">
+        <img src="Logowithtagline.png" alt="Stitchie Logo">
       </div>
-      <div style="display:flex;gap:40px">
+      <div style="color:#d8e0ff; max-width:320px">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance at your doorstep.</div>
+      <div class="cols" style="display:flex; gap:40px; justify-content:center;">
         <div>
           <div style="font-weight:700">Quick Links</div>
           <div style="margin-top:8px"><a href="#services">Services</a><br><a href="#how">How It Works</a></div>
         </div>
         <div>
           <div style="font-weight:700">Contact</div>
-          <div style="margin-top:8px;color:var(--muted)">Hyderabad, India<br>hello@stitchie.inc<br>+91 98765 43210</div>
+          <div style="margin-top:8px;color:#d8e0ff">Hyderabad, India<br>hellostitchie@gmail.com<br>+91 8500872257</div>
         </div>
       </div>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/stitchie_thewayyouwish/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61577601855699" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/stitchie-thewayyouwish/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+      </div>
     </div>
-    <div style="margin-top:22px;font-size:13px;color:rgba(216,224,255,0.8)">© 2025 Stitchie. All rights reserved.</div>
+    <div style="margin-top:22px; font-size:13px; color:#d8e0ff">© 2025 Stitchie. All rights reserved.</div>
   </footer>
 
   <script>
-    // Simple interactivity: Waitlist form submission & basic validation
-    document.getElementById('waitlistForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const email = document.getElementById('email');
-      const phone = document.getElementById('phone');
-      const msg = document.getElementById('waitMsg');
-      if(!email.value || !phone.value){
-        alert('Please enter email and phone');
-        return;
-      }
-      // mock submitting
-      msg.style.display = 'block';
-      setTimeout(()=>{ msg.style.opacity = '1'; }, 50);
-      email.value = ''; phone.value = '';
-    });
+    // =================================================
+    // Final Script for BOTH Forms w/ Extra Logging
+    // =================================================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzc6va-Cn-fXxNHaz_SnFvV2dAZmZbwdqjiODBBs5_rkq59bOXxHs04nZK26jiek8JjDA/exec";
 
-    // Partner form: simple Thank you
-    document.getElementById('partnerForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      alert('Thanks — your application has been submitted. We will reach out within 2-3 business days.');
-      e.target.reset();
-    });
-  </script>
+    // --- Handler for the Waitlist Form ---
+    const waitlistForm = document.getElementById('waitlistForm');
+    const waitMsg = document.getElementById('waitMsg');
+
+    if (waitlistForm) {
+        waitlistForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(waitlistForm);
+            formData.append('formName', 'waitlistForm'); // Tells the script which form this is
+            
+            // NEW LOG: Let's check the FormData object right before sending it.
+            console.log("FormData object prepared for 'waitlistForm':", ...formData.entries());
+
+            submitData(formData, waitlistForm, waitMsg);
+        });
+    }
+
+    // --- Handler for the Partner Form ---
+    const partnerForm = document.getElementById('partnerForm');
+    const partnerMsg = document.getElementById('partnerMsg');
+
+    if (partnerForm) {
+        partnerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(partnerForm);
+            formData.append('formName', 'partnerForm'); // Tells the script which form this is
+            
+            // NEW LOG: Let's check the FormData object right before sending it.
+            console.log("FormData object prepared for 'partnerForm':", ...formData.entries());
+
+            submitData(formData, partnerForm, partnerMsg);
+        });
+    }
+
+    // --- Reusable Function to Submit Data ---
+    function submitData(formData, formElement, msgElement) {
+        const submitButton = formElement.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
+        const data = Object.fromEntries(formData.entries());
+        console.log('Final data object being sent to script:', data); // This log is crucial
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        })
+        .then(response => response.json())
+        .then(jsonResponse => {
+            console.log('Response from script:', jsonResponse);
+            if (jsonResponse.result === "success") {
+                if (msgElement) msgElement.style.display = 'block';
+                formElement.reset();
+            } else {
+                // This is the alert you were seeing
+                alert('Error from script: ' + (jsonResponse.message || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Fetch Error!', error);
+            alert('Oops! A network error occurred.');
+        })
+        .finally(() => {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        });
+    }
+</script>
 </body>
 </html>
