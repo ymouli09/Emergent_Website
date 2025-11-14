@@ -7,7 +7,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-8F719R8B4Q');
 </script>
   <meta charset="utf-8" />
@@ -20,468 +19,415 @@
   <style>
     :root{
       --bg: #fffafc;
-      --accent: #7030a0ff;   /* NEW purple */
-      --accent-2: #fe7b48ff; /* NEW orange */
+      --accent: #7030a0;   /* purple */
+      --accent-2: #fe7b48; /* orange */
       --muted: #6b6b7a;
       --card: #ffffff;
       --glass: rgba(255,255,255,0.7);
-      --radius: 16px;
+      --radius: 14px;
       --shadow: 0 6px 30px rgba(30,20,60,0.08);
-      --purple-grad: linear-gradient(135deg,#7030a0ff 0%, #9a58d1 50%, #fe7b48ff 100%);
-      --mobile-pad: 4vw; /* New variable for consistent mobile padding */
+      --purple-grad: linear-gradient(135deg,#7030a0 0%, #9a58d1 50%, #fe7b48 100%);
+      --mobile-pad: 4vw;
+      --strip-speed: 20s;
+      --max-content-width: 1200px;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%;}
     body{
-      margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
       background:linear-gradient(180deg,#fff 0%, #fff7fb 40%);
-      color:#111; -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale; line-height:1.45;
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      display:flex;
+      justify-content:center;
     }
-    /* Default Desktop Header */
-    header{display:flex;align-items:center;justify-content:space-between;padding:28px 6vw}
+
+    /* page container for consistent horizontal max width */
+    .page {
+      width:100%;
+      max-width:var(--max-content-width);
+      margin:0 auto;
+    }
+
+    /* Header */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:20px 6vw;
+      gap:12px;
+    }
     .brand{display:flex;gap:12px;align-items:center}
     .brand img{height:36px; display:block; object-fit:contain}
 
     nav{display:flex;gap:18px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;font-weight:600}
-    nav a:hover {
-  color: var(--accent-2);
-}
-    .cta{display:flex;gap:10px}
-    .btn{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700; white-space: nowrap;text-decoration: none;}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+    .cta{display:flex;gap:10px;align-items:center}
+
+    .btn{
+      padding:9px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700; white-space: nowrap;text-decoration: none;
+      display:inline-flex;align-items:center;justify-content:center;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease, border-color .12s ease;
+      font-size:14px;
+    }
     .btn.outline{background:transparent;border:2px solid rgba(112,48,160,0.12);color:var(--accent)}
     .btn.primary{background:var(--accent);color:#fff;box-shadow:0 8px 30px rgba(112,48,160,0.18)}
-    .btn.primary:hover{background:var(--accent-2)}
+    .btn.primary:hover{background:var(--accent-2); transform: translateY(-2px);}
 
-    /* Hero (Desktop) */
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:stretch;padding:36px 6vw}
-    .hero > div {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .btn.login{
+      background: var(--purple-grad);
+      color: #fff;
+      border: none;
+      box-shadow: 0 10px 30px rgba(112,48,160,0.16);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:13px;
     }
+    .btn.login i{ font-size:14px; opacity:0.95; transform: translateY(-1px); }
+    .btn.login:hover{ transform: translateY(-2px); }
+
+    .btn.tailor{
+      background: transparent;
+      border: 2px solid rgba(112,48,160,0.12);
+      color: var(--accent);
+      border-radius: 10px;
+      padding: 8px 12px;
+      transition: background .14s ease, color .12s ease, border-color .12s ease, transform .12s ease, box-shadow .12s ease;
+      font-size:13px;
+    }
+    .btn.tailor:hover{
+      background: var(--accent-2);
+      color: #fff;
+      border-color: rgba(254,123,72,0.22);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(254,123,72,0.12);
+    }
+
+    /* Hero layout */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:32px;
+      align-items:stretch;
+      padding:28px 6vw 40px;
+    }
+    .hero > div { display:flex; flex-direction:column; gap:12px; justify-content:space-between; }
     .hero-image-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--card);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 18px;
+      display:flex; align-items:center; justify-content:center;
+      background: var(--card); border-radius: 14px; box-shadow: var(--shadow); padding:10px;
     }
-    .hero-image-container img{
-      max-width:100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 12px;
-    }
+    .hero-image-container img{ max-width:100%; height:auto; object-fit:contain; border-radius:10px; }
 
-    /* Launching Banner */
+    /* Banner */
     .launching-banner {
       background: var(--purple-grad);
       color: #fff;
       text-align: center;
       padding: 10px 6vw;
       font-weight: 700;
-      font-size: 20px;
-      margin-bottom: 20px;
-      animation: slideIn 1s ease-out forwards;
+      font-size:18px;
+      margin-bottom:8px;
       box-shadow: var(--shadow);
-    }
-    @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      border-radius: 10px;
     }
 
-    /* Survey Card */
-    .survey-card {
-        background: rgba(112,48,160,0.05);
-        border-left: 4px solid var(--accent);
-        padding: 12px 18px;
-        border-radius: 0 10px 10px 0;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        font-size: 14px;
+    /* Service strip - made smaller */
+    .service-strip{
+      width:100%;
+      overflow:hidden;
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(30,20,60,0.04);
+      margin: 0 auto 14px;
+      padding:8px 6vw;              /* reduced padding */
     }
-    .survey-card a {
-        color: var(--accent);
-        font-weight: 700;
-        text-decoration: none;
-        margin-left: 4px;
+    .service-track{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      animation: scroll-left linear infinite;
+      animation-duration: var(--strip-speed);
+      will-change: transform;
     }
-
-    h1{font-family:Poppins, Inter; font-size:48px;margin:10px 0 8px}
-    p.lead{color:var(--muted);max-width:650px}
-    .hero-cta{display:flex;gap:12px}
-
-    /* Stats */
-    .stats{display:flex;gap:18px;justify-content: space-between; color:var(--muted);font-weight:700}
-    
-    /* Global Section Styling */
-    .section{padding:48px 6vw}
-    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px}
-    .service {
-        background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,252,0.9));
-        border-radius:14px;
-        padding:18px;
-        text-align:center;
-        box-shadow:0 6px 20px rgba(20,20,30,0.04);
-        display: flex; /* Enable flexbox for vertical centering */
-        flex-direction: column; /* Stack children vertically */
-        align-items: center; /* Center children horizontally */
+    .service-item{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 10px;            /* smaller pills */
+      border-radius:999px;
+      background:rgba(112,48,160,0.06);
+      color:var(--accent);
+      font-weight:700;
+      white-space:nowrap;
+      font-size:13px;
+      box-shadow: 0 2px 6px rgba(20,20,30,0.04);
     }
-    .service h4{margin:12px 0 6px}
-    .service p{color:var(--muted);font-size:14px}
-
-    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
-    .step{
-        background:var(--card);
-        padding:18px;
-        border-radius:12px;
-        box-shadow:var(--shadow);
-        /* New: Align content in step vertically */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center horizontally */
-        text-align: center;
+    @keyframes scroll-left {
+      from { transform: translateX(0%); }
+      to   { transform: translateX(-50%); }
     }
-    .step .num {
-        background: var(--accent-2);
-        color: #fff;
-        font-size: 18px;
-        font-weight: 700;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 12px;
+    .service-strip:hover .service-track,
+    .service-strip:focus-within .service-track {
+      animation-play-state: paused;
     }
 
-    /* Form Styling */
-    form.waitlist{display:flex;flex-direction:column;gap:12px}
-    input,select{
-        padding:14px; 
-        border-radius:12px; 
-        border:1px solid #ccc; 
-        font-size:15px;
-        color: #333;
+    /* Stats centered blocks */
+    .stats{
+      display:flex; gap:14px; justify-content:space-between; color:var(--muted); font-weight:700; margin-top:12px;
     }
-    input::placeholder {
-        color: var(--muted);
-    }
-    .form-group-horizontal {
-        display: flex;
-        gap: 8px;
-    }
+    .stats > div{ flex:1; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:0; }
+    .stat-number{ font-size:18px; font-weight:800; color:var(--accent); line-height:1; }
+    .stat-label{ margin-top:6px; font-size:12px; color:var(--muted); font-weight:700; }
+
+    /* Section & service card */
+    .section{ padding:36px 6vw; }
+    .services{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:12px; }
+    .service{ background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,252,0.95)); border-radius:12px; padding:14px; text-align:center; box-shadow:0 6px 20px rgba(20,20,30,0.04); display:flex; flex-direction:column; align-items:center; }
+
+    .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:14px; }
+    .step{ background:var(--card); padding:14px; border-radius:10px; box-shadow:var(--shadow); display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .step .num{ background:var(--accent-2); color:#fff; font-size:16px; font-weight:700; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+
+    /* Forms */
+    form.waitlist{ display:flex; flex-direction:column; gap:10px; }
+    input, select{ padding:12px; border-radius:10px; border:1px solid #ccc; font-size:14px; color:#333; }
+    input::placeholder { color: var(--muted); }
 
     /* Footer */
-    footer {
-      background: linear-gradient(90deg, #7030a0, #fe7b48);
-      color: #ffffff;
-      padding: 20px var(--mobile-pad);
-      margin-top: 60px;
-      text-align: center;
-    }
-    footer a {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-    footer .muted {
-      color: #d8e0ff;
-    }
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      margin: 20px 0; /* Centered vertically with space above and below */
-      justify-content: center;
-    }
-    .social-icons a {
-      color: #ffffff;
-      font-size: 20px;
-      transition: color 0.3s;
-    }
-    .social-icons a:hover {
-      color: #d8e0ff;
-    }
+    footer{ background: linear-gradient(90deg, #7030a0, #fe7b48); color:#fff; padding:20px 6vw; margin-top:40px; text-align:center; border-radius:0; }
+    .social-icons { display:flex; gap:12px; margin:14px 0; justify-content:center; }
 
-    /* === Mobile Screen Media Queries === */
-    @media (max-width:1000px){
-      .hero, .split, .partner-grid{grid-template-columns:1fr}
-      .hero > div { display: block; gap: 0; }
-      .hero-image-container { order: -1; margin-bottom: 20px; }
-      .services{grid-template-columns:repeat(2,1fr)}
-      .steps{grid-template-columns:repeat(2,1fr)}
-      header{padding:18px 4vw;} 
-      h1{font-size:38px; margin-top: 0;}
+    /* ------------------ MOBILE / SMALL SCREENS ------------------ */
+    @media (max-width:900px){
+      :root{ --max-content-width:100%; }
+      header{ padding:14px 5vw; }
+      .hero{ grid-template-columns:1fr; padding:18px 5vw 28px; gap:18px; }
+      .hero-image-container { order:-1; padding:8px }
+      .hero > div{ gap:10px }
+      .services{ grid-template-columns:repeat(2,1fr) }
+      .steps{ grid-template-columns:repeat(2,1fr) }
+      .launching-banner{ font-size:16px; padding:10px 5vw; margin-bottom:8px; }
+      .service-strip{ padding:6px 5vw; margin-bottom:12px; }
+      .service-item{ padding:6px 8px; font-size:13px; gap:8px; }
+      .stats{ gap:10px; }
     }
 
     @media (max-width:600px){
-      /* Full-width utilization & Consistent Padding */
-      header, .launching-banner, .hero, .section, footer{
-          padding-left: var(--mobile-pad);
-          padding-right: var(--mobile-pad);
-      }
-      .section{padding-top: 30px; padding-bottom: 30px;}
-      .hero{padding-top: 20px; padding-bottom: 20px; gap: 15px;}
-      
-      /* CRITICAL HEADER CTA OVERLAP FIX */
-      header{
-        padding-top: 15px;
-        padding-bottom: 15px;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-      .brand{width: 100%; justify-content: center;}
-      .cta{
-        width: 100%; 
-        justify-content: space-between;
-      }
-      .cta .btn {
-          padding: 8px 12px; 
-          font-size: 13px;
-          flex-grow: 1;
-          text-align: center;
-      }
+      /* compact header: stack brand + CTAs */
+      header{ flex-direction:column; align-items:flex-start; gap:8px; padding:12px 4vw; }
+      .brand{ width:100%; justify-content:space-between; display:flex; }
+      nav{ display:none; } /* hide desktop nav */
+      .cta{ width:100%; display:flex; flex-direction:column; gap:8px; }
+      .cta .btn{ width:100%; padding:10px; font-size:14px; border-radius:10px; }
 
-      .services{grid-template-columns:1fr}
-      nav{display:none}
-      
-      /* Typography & Heading Fix */
-      .launching-banner { font-size: 16px; margin-bottom: 10px; }
-      h1{font-size: 30px; line-height: 1.2; margin-bottom: 5px;}
-      p.lead {margin-top: 0; margin-bottom: 15px;}
+      /* smaller hero */
+      .hero{ padding:14px 4vw; gap:12px; }
+      h1{ font-size:24px; margin:0; }
+      p.lead{ font-size:14px; color:var(--muted) }
 
-      /* Hero Content Stacking Fixes */
-      .hero-image-container { padding: 0; border-radius: 12px; }
-      .hero-cta{ flex-direction: column; margin-top: 0; }
-      .hero-cta .btn { width: 100%; margin-bottom: 10px; }
+      /* stats stack vertically */
+      .stats{ flex-direction:column; align-items:stretch; gap:10px; }
+      .stats > div{ width:100%; text-align:left; padding:8px 10px; background:rgba(250,250,252,0.6); border-radius:10px; }
 
-      /* Survey Card Fix */
-      .survey-card { padding: 10px 15px; margin-top: 15px; margin-bottom: 15px; font-size: 13px; border-radius: 10px; }
-      
-      /* Tailor Form Misalignment Fix (Vertical Stack) */
-      .form-group-horizontal {
-          flex-direction: column; 
-          gap: 10px;
-      }
-      .form-group-horizontal input {
-          width: 100%; 
-      }
-      
-      /* Footer Alignment Fix */
-      footer {
-        padding: 15px var(--mobile-pad);
-        text-align: center;
-      }
-      footer > div:first-child {
-          display: none;
-      }
-      footer .brand {
-        margin-bottom: 10px;
-      }
-      footer .brand img {
-        height: 30px;
-      }
-      footer .muted {
-        margin: 5px 0;
-      }
-      .cols {
-          display: none;
-      }
-      .social-icons {
-          margin: 10px 0;
-          justify-content: center;
-      }
+      /* services & steps single column */
+      .services{ grid-template-columns:1fr; }
+      .steps{ grid-template-columns:1fr; }
+
+      /* smaller cards & forms */
+      .service, .step{ padding:12px; border-radius:10px; }
+      form.waitlist{ gap:8px; }
+      input{ padding:10px; font-size:14px; }
+
+      /* shrink service strip and slow animation for readability */
+      .service-strip{ padding:6px 4vw; margin-bottom:10px; }
+      .service-track{ animation-duration: calc(var(--strip-speed) * 1.4); }
+    }
+
+    /* accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .service-track{ animation: none !important; transform: none !important; }
+      .btn{ transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <header>
-  <div class="brand">
-    <img src="Logowithtagline.png" alt="Stitchie Logo">
-  </div>
-  <nav>
-    <a href="#services">Services</a>
-    <a href="#how">How it Works</a>
-    <a href="#customers">For Customers</a>
-    <a href="#tailors">For Tailors</a>
-  </nav>
-  <div class="hero-cta">
-            <a class="btn outline" href="#tailors">Join as Tailor</a>
-    <a class="btn primary" href="#customers">Join Waitlist</a>
-            
-        </div>
-</header>
-
-  <main>
-    <div class="launching-banner">Launching soon in Hyderabad</div>
-
-    <section class="hero">
-      <div>
-        <h1><span style="color:var(--accent)">Fashion at your <span style="color:var(--accent-2)">Doorstep</span></h1>
-        <p class="lead">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance — all at your doorstep.</p>
-        
-        <div class="survey-card">
-            <strong>Help us shape Stitchie</strong>
-            <p style="margin: 4px 0 0; color: var(--muted);">Take a short survey — your feedback helps us design the perfect tailoring marketplace.
-            <a href="https://forms.gle/EyVfDzXTnq5hK3Rd6" target="_blank" rel="noopener noreferrer">Fill the survey here &rarr;</a>
-            </p>
-        </div>
-        <div class="hero-cta">
-            <a class="btn primary" href="#customers">Join Waitlist - Customers</a>
-            <a class="btn outline" href="#tailors">Join as Tailor</a>
-        </div>
-        <div class="stats" aria-hidden>
-  <div>10+<br><span style="font-size:12px;color:var(--muted)">Tailors Ready to onboard</span></div>
-  <div>100+<br><span style="font-size:12px;color:var(--muted)">Style Ideas Submitted</span></div>
-  <div>5-Star<br><span style="font-size:12px;color:var(--muted)">Early Reviews</span></div>
-  <div>1 City<br><span style="font-size:12px;color:var(--muted)">Hyderabad & Growing</span></div>
-</div>
-      </div>
-
-      <aside class="hero-image-container">
-        <img src="Stitchie Workflow Diagram.png" alt="Stitchie Workflow Diagram">
-      </aside>
-    </section>
-
-    <section id="services" class="section">
-      <h2 style="text-align:center;font-family:Poppins">Our Services</h2>
-      <p style="text-align:center;color:var(--muted)">From custom stitching to alterations, we connect you with skilled professionals for all your fashion needs</p>
-      <div class="services" style="margin-top:22px">
-        <div class="service">
-          <div style="font-size:28px">✂️</div>
-          <h4>Custom Stitching</h4>
-          <p>Get your dream outfits stitched by verified local tailors with doorstep pickup and delivery.</p>
-        </div>
-        <div class="service">
-          <div style="font-size:28px">🧵</div>
-          <h4>Alterations &amp; Repairs</h4>
-          <p>Professional alterations and clothing repairs done with precision and care.</p>
-        </div>
-        <div class="service">
-          <div style="font-size:28px">🧼</div>
-          <h4>Garment Care</h4>
-          <p>Premium laundry and garment care services to keep your clothes looking fresh.</p>
-        </div>
-        <div class="service">
-          <div style="font-size:28px">👑</div>
-          <h4>Festive &amp; Wedding Wear</h4>
-          <p>Specialized services for ethnic wear, party outfits, and wedding collections.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="how" class="section">
-      <h3 style="text-align:center;font-family:Poppins">How It Works</h3>
-      <p style="text-align:center;color:var(--muted)">Simple steps to get started with Stitchie - whether you're a customer or a tailor</p>
-      <div class="steps">
-        <div class="step"><div class="num">1</div><h4>Browse & Select</h4><p style="color:var(--muted)">Browse verified tailors by category, style, and ratings.</p></div>
-        <div class="step"><div class="num">2</div><h4>Book Service</h4><p style="color:var(--muted)">Schedule your service and choose pickup time.</p></div>
-        <div class="step"><div class="num">3</div><h4>Doorstep Pickup</h4><p style="color:var(--muted)">Our agents collect your fabric and measurements at home.</p></div>
-        <div class="step"><div class="num">4</div><h4>Get Delivered</h4><p style="color:var(--muted)">Track progress and receive your perfect outfit at your doorstep.</p></div>
-      </div>
-    </section>
-
-    <section id="customers" class="section">
-      <div class="split">
-        <div>
-          <h3 style="font-family:Poppins">Fashion Made Personal</h3>
-          <p style="color:var(--muted)">Experience the convenience of doorstep tailoring services with verified professionals, quality assurance, and timely delivery.</p>
-          <ul class="benefits" style="margin-top:18px">
-            <li>Doorstep pickup and delivery service</li>
-            <li>Verified and rated tailors &amp; boutiques</li>
-            <li>Quality guaranteed with timely delivery</li>
-            <li>COD and digital payment options</li>
-            <li>Real-time order tracking</li>
-            <li>Affordable and premium pricing options</li>
-          </ul>
-
-          <div style="margin-top:18px" class="card">
-            <strong style="color:#111">"Amazing service! Got my wedding lehenga stitched perfectly."</strong>
-            <div style="margin-top:8px;color:var(--muted)">— Priya Sharma, Customer</div>
-          </div>
-        </div>
-
-        <aside class="card">
-          <h4 style="margin:0 0 6px">Join Our Waitlist</h4>
-          <p style="color:var(--muted);margin:0 0 12px">Be the first to experience Stitchie when we launch in Hyderabad</p>
-          <form class="waitlist" id="waitlistForm">
-            <input type="email" id="email" name="email" placeholder="Email Address" required>
-            <input type="tel" id="phone" name="phone" placeholder="Phone Number" maxlength="10" required>
-            <button class="btn primary full" type="submit">Join Waitlist</button>
-            <div id="waitMsg" style="font-size:13px;color:green;display:none">Thanks — we'll notify you when we launch.</div>
-          </form>
-        </aside>
-      </div>
-    </section>
-
-    <section id="tailors" class="section">
-      <div class="partner">
-        <h3 style="font-family:Poppins">Grow Your Business</h3>
-        <p style="color:var(--muted)">Join our network of verified tailors and boutiques. Get more customers, digital tools, and logistics support to scale your business.</p>
-
-        <div class="partner-grid" style="margin-top:18px">
-          <div class="card">
-            <h4>Partner With Us</h4>
-            <form id="partnerForm" style="display:grid;gap:10px;margin-top:12px">
-  <input name="businessName" placeholder="Business Name*" required>
-  <input name="ownerName" placeholder="Owner Name*" required>
-  <input type="email" name="email" placeholder="Email Address*" required>
-  <input name="phone" placeholder="Phone Number*" maxlength="10" required>
-  <div class="form-group-horizontal">
-    <input name="experience" placeholder="Experience (Years)" style="flex:1">
-    <input name="location" placeholder="Location" style="flex:1">
-  </div>
-  <button class="btn primary" type="submit">Apply to Join</button>
-  <div id="partnerMsg" style="font-size:13px;color:green;display:none">Thanks! We've received your application.</div>
-</form>
-          </div>
-
-          <div style="background:transparent;padding:18px;align-self:center">
-            <h4>Why Partner With Stitchie?</h4>
-            <ul style="color:var(--muted)">
-              <li>Increased digital visibility for your business</li>
-              <li>Consistent flow of verified customers</li>
-              <li>Logistics support for pickup/delivery</li>
-              <li>Digital tools for order management</li>
-              <li>Flexible commission or subscription model</li>
-              <li>Quality control and customer support</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+  <div class="page">
+    <header>
       <div class="brand">
         <img src="Logowithtagline.png" alt="Stitchie Logo">
       </div>
-      <div style="color:#d8e0ff; max-width:320px">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance at your doorstep.</div>
-      <div class="cols" style="display:flex; gap:40px; justify-content:center;">
+
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#how">How it Works</a>
+        <a href="#customers">For Customers</a>
+        <a href="#tailors">For Tailors</a>
+      </nav>
+
+      <div class="cta" role="navigation" aria-label="Primary actions">
+        <a class="btn outline tailor" href="#tailors">Join as Tailor</a>
+        <a class="btn primary" href="#customers">Join Waitlist</a>
+        <a class="btn login" href="https://on-demand-tailor.emergent.host/" target="_blank" rel="noopener noreferrer" aria-label="Login to Stitchie"><i class="fas fa-right-to-bracket"></i> Login</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1) Updated live banner -->
+      <div class="launching-banner">Stitchie is Live in Hyderabad - Limited Areas.</div>
+
+      <!-- 2) Compact horizontal scrolling strip under banner -->
+      <div class="service-strip" role="region" aria-label="Areas we service. Hover to pause.">
+        <div class="service-track" aria-hidden="true">
+          <div class="service-item">RTC X Roads</div>
+          <div class="service-item">Amberpet</div>
+          <div class="service-item">Himayath Nagar</div>
+          <div class="service-item">Kavadiguda</div>
+          <div class="service-item">Nallakunta</div>
+          <div class="service-item">Vidyanagar</div>
+          <div class="service-item">Chikkadipally</div>
+
+          <div class="spacer" style="width:28px"></div>
+
+          <!-- duplicate for seamless loop -->
+          <div class="service-item">RTC X Roads</div>
+          <div class="service-item">Amberpet</div>
+          <div class="service-item">Himayath Nagar</div>
+          <div class="service-item">Kavadiguda</div>
+          <div class="service-item">Nallakunta</div>
+          <div class="service-item">Vidyanagar</div>
+          <div class="service-item">Chikkadipally</div>
+        </div>
+      </div>
+
+      <section class="hero" aria-label="Hero">
         <div>
+          <h1 style="font-family:Poppins,Inter; font-size:36px; margin:0 0 4px;"><span style="color:var(--accent)">Fashion at your</span> <span style="color:var(--accent-2)">Doorstep</span></h1>
+          <p class="lead">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance — all at your doorstep.</p>
+
+          <div class="survey-card" style="background:rgba(112,48,160,0.05); border-left:4px solid var(--accent); padding:10px 14px; border-radius:8px;">
+            <strong>Help us shape Stitchie</strong>
+            <p style="margin:6px 0 0; color:var(--muted); font-size:13px;">Take a short survey — your feedback helps us design the perfect tailoring marketplace.
+              <a href="https://forms.gle/EyVfDzXTnq5hK3Rd6" target="_blank" rel="noopener noreferrer">Fill the survey here &rarr;</a>
+            </p>
+          </div>
+
+          <div class="hero-cta" style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="#customers" style="min-width:160px;">Join Waitlist - Customers</a>
+            <a class="btn outline tailor" href="#tailors" style="min-width:140px;">Join as Tailor</a>
+          </div>
+
+          <div class="stats" aria-hidden>
+            <div><div class="stat-number">10+</div><div class="stat-label">Tailors in Beta Program</div></div>
+            <div><div class="stat-number">25+</div><div class="stat-label">Consumer Sign-Ups</div></div>
+            <div><div class="stat-number">80%+</div><div class="stat-label">Positive Feedback</div></div>
+            <div><div class="stat-number">5-7 days</div><div class="stat-label">Average Delivery</div></div>
+          </div>
+        </div>
+
+        <aside class="hero-image-container" aria-hidden>
+          <img src="Stitchie Workflow Diagram.png" alt="Stitchie Workflow Diagram">
+        </aside>
+      </section>
+
+      <section id="services" class="section">
+        <h2 style="text-align:center;font-family:Poppins">Our Services</h2>
+        <p style="text-align:center;color:var(--muted)">From custom stitching to alterations, we connect you with skilled professionals for all your fashion needs</p>
+        <div class="services" style="margin-top:12px">
+          <div class="service"><div style="font-size:24px">✂️</div><h4>Custom Stitching</h4><p style="color:var(--muted)">Get your dream outfits stitched by verified local tailors with doorstep pickup and delivery.</p></div>
+          <div class="service"><div style="font-size:24px">🧵</div><h4>Alterations & Repairs</h4><p style="color:var(--muted)">Professional alterations and clothing repairs done with precision and care.</p></div>
+          <div class="service"><div style="font-size:24px">🧼</div><h4>Garment Care</h4><p style="color:var(--muted)">Premium laundry and garment care services to keep your clothes looking fresh.</p></div>
+          <div class="service"><div style="font-size:24px">👑</div><h4>Festive & Wedding Wear</h4><p style="color:var(--muted)">Specialized services for ethnic wear, party outfits, and wedding collections.</p></div>
+        </div>
+      </section>
+
+      <section id="how" class="section">
+        <h3 style="text-align:center;font-family:Poppins">How It Works</h3>
+        <p style="text-align:center;color:var(--muted)">Simple steps to get started with Stitchie - whether you're a customer or a tailor</p>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><h4>Browse & Select</h4><p style="color:var(--muted)">Browse verified tailors by category, style, and ratings.</p></div>
+          <div class="step"><div class="num">2</div><h4>Book Service</h4><p style="color:var(--muted)">Schedule your service and choose pickup time.</p></div>
+          <div class="step"><div class="num">3</div><h4>Doorstep Pickup</h4><p style="color:var(--muted)">Our agents collect your fabric and measurements at home.</p></div>
+          <div class="step"><div class="num">4</div><h4>Get Delivered</h4><p style="color:var(--muted)">Track progress and receive your perfect outfit at your doorstep.</p></div>
+        </div>
+      </section>
+
+      <section id="customers" class="section">
+        <div style="display:flex; gap:18px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:220px;">
+            <h3 style="font-family:Poppins">Fashion Made Personal</h3>
+            <p style="color:var(--muted)">Experience the convenience of doorstep tailoring services with verified professionals, quality assurance, and timely delivery.</p>
+            <ul style="margin-top:12px; color:var(--muted)"><li>Doorstep pickup and delivery service</li><li>Verified and rated tailors & boutiques</li><li>Quality guaranteed with timely delivery</li><li>COD and digital payment options</li><li>Real-time order tracking</li><li>Affordable and premium pricing options</li></ul>
+          </div>
+
+          <aside class="card" style="flex:0 0 320px; padding:14px; border-radius:10px; box-shadow:var(--shadow); background:var(--card);">
+            <h4 style="margin:0 0 6px">Join Our Waitlist</h4>
+            <p style="color:var(--muted); margin:0 0 8px">Be the first to experience Stitchie when we launch in Hyderabad</p>
+            <form class="waitlist" id="waitlistForm">
+              <input type="email" id="email" name="email" placeholder="Email Address" required>
+              <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+              <button class="btn primary full" type="submit" style="width:100%;">Join Waitlist</button>
+              <div id="waitMsg" style="font-size:13px;color:green;display:none;margin-top:8px;">Thanks — we'll notify you when we launch.</div>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+      <section id="tailors" class="section">
+        <div class="partner">
+          <h3 style="font-family:Poppins">Grow Your Business</h3>
+          <p style="color:var(--muted)">Join our network of verified tailors and boutiques. Get more customers, digital tools, and logistics support to scale your business.</p>
+
+          <div class="partner-grid" style="margin-top:12px; display:grid; grid-template-columns:1fr; gap:12px;">
+            <div class="card" style="padding:14px; background:var(--card); border-radius:10px; box-shadow:var(--shadow);">
+              <h4>Partner With Us</h4>
+              <form id="partnerForm" style="display:grid;gap:10px;margin-top:12px">
+                <input name="businessName" placeholder="Business Name*" required>
+                <input name="ownerName" placeholder="Owner Name*" required>
+                <input type="email" name="email" placeholder="Email Address*" required>
+                <input name="phone" placeholder="Phone Number*" required>
+                <div style="display:flex;gap:8px;">
+                  <input name="experience" placeholder="Experience (Years)" style="flex:1">
+                  <input name="location" placeholder="Location" style="flex:1">
+                </div>
+                <button class="btn primary" type="submit">Apply to Join</button>
+                <div id="partnerMsg" style="font-size:13px;color:green;display:none">Thanks! We've received your application.</div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div class="brand"><img src="Logowithtagline.png" alt="Stitchie Logo" style="height:30px"></div>
+        <div style="color:#d8e0ff; max-width:420px; text-align:center;">Your one-stop fashion-tech platform for custom stitching, alterations, and clothing maintenance at your doorstep.</div>
+<div>
           <div style="font-weight:700">Quick Links</div>
           <div style="margin-top:8px"><a href="#services">Services</a><br><a href="#how">How It Works</a></div>
         </div>
         <div>
           <div style="font-weight:700">Contact</div>
-          <div style="margin-top:8px;color:#d8e0ff">Hyderabad, India<br>hellostitchie@gmail.com<br>+91 8500872257</div>
+          <div style="margin-top:8px;color:#d8e0ff">Hyderabad, India<br>hello@stitchie.co.in<br>+91 8500872257</div>
+
+        <div class="social-icons">
+          <a href="https://www.instagram.com/stitchie_thewayyouwish/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61577601855699" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.linkedin.com/company/stitchie-thewayyouwish/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/stitchie_thewayyouwish/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/profile.php?id=61577601855699" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.linkedin.com/company/stitchie-thewayyouwish/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </div>
-    <div style="margin-top:22px; font-size:13px; color:#d8e0ff">© 2025 Stitchie. All rights reserved.</div>
-  </footer>
+      <div style="margin-top:12px; font-size:13px; color:#d8e0ff">© 2025 Stitchie. All rights reserved.</div>
+    </footer>
+  </div>
 
   <script>
     // =================================================
@@ -489,79 +435,233 @@
     // =================================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzc6va-Cn-fXxNHaz_SnFvV2dAZmZbwdqjiODBBs5_rkq59bOXxHs04nZK26jiek8JjDA/exec";
 
-    // --- Handler for the Waitlist Form ---
+    // Waitlist Form
     const waitlistForm = document.getElementById('waitlistForm');
     const waitMsg = document.getElementById('waitMsg');
-
     if (waitlistForm) {
-        waitlistForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(waitlistForm);
-            formData.append('formName', 'waitlistForm'); // Tells the script which form this is
-            
-            // NEW LOG: Let's check the FormData object right before sending it.
-            console.log("FormData object prepared for 'waitlistForm':", ...formData.entries());
-
-            submitData(formData, waitlistForm, waitMsg);
-        });
+      waitlistForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(waitlistForm);
+        formData.append('formName', 'waitlistForm');
+        console.log("FormData object prepared for 'waitlistForm':", ...formData.entries());
+        submitData(formData, waitlistForm, waitMsg);
+      });
     }
 
-    // --- Handler for the Partner Form ---
+    // Partner Form
     const partnerForm = document.getElementById('partnerForm');
     const partnerMsg = document.getElementById('partnerMsg');
-
     if (partnerForm) {
-        partnerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(partnerForm);
-            formData.append('formName', 'partnerForm'); // Tells the script which form this is
-            
-            // NEW LOG: Let's check the FormData object right before sending it.
-            console.log("FormData object prepared for 'partnerForm':", ...formData.entries());
-
-            submitData(formData, partnerForm, partnerMsg);
-        });
+      partnerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(partnerForm);
+        formData.append('formName', 'partnerForm');
+        console.log("FormData object prepared for 'partnerForm':", ...formData.entries());
+        submitData(formData, partnerForm, partnerMsg);
+      });
     }
 
-    // --- Reusable Function to Submit Data ---
     function submitData(formData, formElement, msgElement) {
-        const submitButton = formElement.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
-
-        const data = Object.fromEntries(formData.entries());
-        console.log('Final data object being sent to script:', data); // This log is crucial
-
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        })
-        .then(response => response.json())
-        .then(jsonResponse => {
-            console.log('Response from script:', jsonResponse);
-            if (jsonResponse.result === "success") {
-                if (msgElement) msgElement.style.display = 'block';
-                formElement.reset();
-            } else {
-                // This is the alert you were seeing
-                alert('Error from script: ' + (jsonResponse.message || 'Unknown error'));
-            }
-        })
-        .catch(error => {
-            console.error('Fetch Error!', error);
-            alert('Oops! A network error occurred.');
-        })
-        .finally(() => {
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
-        });
+      const submitButton = formElement.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Submitting...';
+      const data = Object.fromEntries(formData.entries());
+      console.log('Final data object being sent to script:', data);
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      })
+      .then(response => response.json())
+      .then(jsonResponse => {
+        console.log('Response from script:', jsonResponse);
+        if (jsonResponse.result === "success") {
+          if (msgElement) msgElement.style.display = 'block';
+          formElement.reset();
+        } else {
+          alert('Error from script: ' + (jsonResponse.message || 'Unknown error'));
+        }
+      })
+      .catch(error => {
+        console.error('Fetch Error!', error);
+        alert('Oops! A network error occurred.');
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      });
     }
-</script>
+  </script>
 </body>
+<!-- ====== Celebration / Confetti Blast (runs once on load, 5s) ====== -->
+<style>
+  /* Full-screen canvas */
+  #confetti-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 600ms ease;
+  }
+  /* hidden state used when fading out */
+  #confetti-canvas._hide { opacity: 0; }
+</style>
+
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  // Respect reduced motion
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) {
+    // no animation for users who prefer reduced motion
+    const el = document.getElementById('confetti-canvas');
+    if (el) el.remove();
+    return;
+  }
+
+  const DURATION_MS = 5000;     // show confetti for 5s
+  const PARTICLES = 140;       // total number of particles (reasonable for mobile)
+  const GRAVITY = 0.25;
+  const TERMINATE_DELAY = 700; // wait for fade-out before removal
+
+  const canvas = document.getElementById('confetti-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // device pixel ratio for crispness
+  function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap DPR for perf
+    canvas.width = Math.round(window.innerWidth * dpr);
+    canvas.height = Math.round(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // utility random helpers
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+  function randInt(min, max) { return Math.floor(rand(min, max)); }
+
+  // color palette (matches site accents)
+  const COLORS = [
+    '#7030a0', // purple
+    '#9a58d1',
+    '#fe7b48', // orange
+    '#ffd7b3',
+    '#ffffff'
+  ];
+
+  // create particle objects
+  const particles = [];
+  const cw = () => window.innerWidth;
+  const ch = () => window.innerHeight;
+
+  for (let i = 0; i < PARTICLES; i++) {
+    // spawn from around center-top area for dramatic blast
+    const startX = cw() * 0.5 + rand(-80, 80);
+    const startY = ch() * 0.20 + rand(-30, 30);
+
+    const angle = rand(-Math.PI * 0.9, Math.PI * 0.9);
+    const speed = rand(2.5, 8.0) * (1 - Math.abs((startX - cw()/2) / (cw()/2)) * 0.25);
+    particles.push({
+      x: startX,
+      y: startY,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed * -1.0, // upward
+      size: rand(6, 14),
+      rot: rand(0, Math.PI * 2),
+      vr: rand(-0.12, 0.12),
+      color: COLORS[randInt(0, COLORS.length)],
+      shape: (Math.random() > 0.5) ? 'rect' : 'circle',
+      ttl: randInt(2400, 4200) // time-to-live in ms (particles die earlier)
+    });
+  }
+
+  let lastTime = performance.now();
+  let running = true;
+
+  function update(now) {
+    const dt = Math.min(32, now - lastTime);
+    lastTime = now;
+
+    // clear with slight alpha to create trailing glow effect
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.ttl -= dt;
+      if (p.ttl <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      // physics
+      p.vy += GRAVITY * (dt / 16); // gravity scales with dt
+      p.x += p.vx * (dt / 16);
+      p.y += p.vy * (dt / 16);
+      p.rot += p.vr * (dt / 16);
+
+      // fade-out near end of ttl
+      const fade = Math.max(0, Math.min(1, p.ttl / 1000));
+
+      ctx.save();
+      ctx.globalAlpha = 0.95 * fade;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+
+      if (p.shape === 'rect') {
+        const w = p.size * 1.6;
+        const h = p.size * 0.9;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-w/2, -h/2, w, h);
+      } else {
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.arc(0, 0, p.size * 0.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    if (running && particles.length > 0) {
+      requestAnimationFrame(update);
+    }
+  }
+
+  // start animation
+  requestAnimationFrame(update);
+
+  // stop after DURATION_MS, fade out and cleanup
+  setTimeout(() => {
+    running = false; // stops new frames once particles exhausted (we'll still call one final draw)
+    // fade out canvas
+    canvas.classList.add('_hide');
+    // remove canvas after fade completes
+    setTimeout(() => {
+      try {
+        window.removeEventListener('resize', resizeCanvas);
+        canvas.remove();
+      } catch (e) { /* ignore */ }
+    }, TERMINATE_DELAY);
+  }, DURATION_MS);
+
+  // Optional: play a subtle audio "pop" (muted by default so user agent doesn't block)
+  // If you want to play a sound, uncomment below and provide a short base64 or URL:
+  /*
+  const audio = new Audio('path/to/small-pop.mp3');
+  audio.volume = 0.6;
+  audio.play().catch(()=>{});
+  */
+
+})();
+</script>
+<!-- ====== End Confetti ====== -->
+
 </html>
-
-
-
-
